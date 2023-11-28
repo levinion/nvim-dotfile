@@ -6,14 +6,14 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
--- Sutosave while leave buf
+-- Autosave while leave buf
 vim.api.nvim_create_autocmd({ "BufLeave" }, {
   pattern = { "*" },
   command = "silent! wall",
   nested = true,
 })
 
--- Switch to english while input esc. (only for fcitx5)
+-- Switch to English while esc pressed. (only for fcitx5)
 vim.api.nvim_create_autocmd({ "InsertLeave" }, {
   pattern = { "*" },
   callback = function()
@@ -39,5 +39,12 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "rust" },
+  callback = function()
+    require("mini.pairs").unmap("i", "'", "''")
   end,
 })
