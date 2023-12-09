@@ -3,6 +3,5 @@
 -- Add any additional options here
 
 local opt = vim.opt
-opt.wrap = true
 opt.spell = false
 -- opt.shiftwidth = 4
